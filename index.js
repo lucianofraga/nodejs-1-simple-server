@@ -1,23 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-// const MyEventEmitter = require("./test/events-demo");
-// console.log("Hello world");
-// console.log(__dirname);
-// fs.writeFile(
-//   path.join(__dirname, "hello.txt"),
-//   "hello world!! from file",
-//   (err) => {
-//     if (err) throw err;
-
-//     console.log("file has been created");
-//   }
-// );
-// const emitter = new MyEventEmitter();
-// emitter.on("event", () => {
-//   console.log("event emitted!");
-// });
-// emitter.emit("event");
-
 const server = require("http");
 const url = require("url");
 const PORT = process.env.PORT || 5000;
@@ -56,7 +38,11 @@ server
 
       case "": // html
         const content = fs.readFile(
-          path.join(__dirname, "/public", `${uri.href}.html`),
+          path.join(
+            __dirname,
+            "/public",
+            `${uri.href === "/" ? "home" : uri.href}.html`
+          ),
           "utf8",
           (err, data) => {
             if (err) throw err;
